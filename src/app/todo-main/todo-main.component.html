@@ -1,0 +1,44 @@
+<header>
+    <div class="container container-nav">
+        <div>
+            <h1>Manager's Todo List</h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a routerLink="/">HOME</a></li>
+                <li><a routerLink="/todo"  routerLinkActive="active-link">TODO LIST</a></li>
+                <li><a href="" routerLinkActive="active-link">ABOUT</a></li>
+            </ul>
+        </nav>
+       
+    </div>
+</header>
+
+<div fxLayout="column" class="basic-container">
+    <mat-label>New Todo Item:</mat-label>
+    <div class="formWrapper" fxLayout="row" fxLayoutGap="10px">
+         
+        <mat-form-field fxFlex="20">
+            <input matInput placeholder="Todo Title" type="text">
+        </mat-form-field>
+        <mat-form-field fxFlex="20">
+            <input matInput placeholder="Todo Description" type="text">
+        </mat-form-field>
+
+        <button (click)="createNewItem()" color="warning">Submit</button>
+    </div>
+   
+    <div>
+        <mat-list>
+            <mat-label>Todo List:</mat-label> 
+             <mat-list-item *ngFor="let item of allItems$ | async" [value]="item">{{item.title}} - {{item.description}}</mat-list-item>
+         </mat-list> 
+
+    </div>
+    
+</div>
+
+
+
+
+
