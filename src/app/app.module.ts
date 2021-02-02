@@ -11,12 +11,17 @@ import { MaterialModule } from './shared/material.module';
 import { ItemAPI } from './urls/items';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DialogItemComponent } from './dialog-item/dialog-item.component';
+import { AboutComponent } from './about/about.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    TodoMainComponent
+    TodoMainComponent,
+    DialogItemComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

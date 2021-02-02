@@ -1,0 +1,57 @@
+<ng-template [ngIf]="data.type === 'new'">
+    <h1 mat-dialog-title>New Todo Item</h1>
+    <form [formGroup]="itemForm">
+        <div fxLayout="column" mat-dialog-content>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <mat-form-field fxFlex="50">
+              <input autocomplete="off" placeholder="Title" matInput formControlName="title">
+            </mat-form-field>
+          </div>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <mat-form-field fxFlex="50">
+              <input autocomplete="off" placeholder="Description" matInput formControlName="description">
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+  </ng-template>
+
+
+  <ng-template [ngIf]="data.type === 'edit'">
+    <h1 mat-dialog-title>Edit Todo Item</h1>
+    <form [formGroup]="itemForm">
+        <div fxLayout="column" mat-dialog-content>
+          <div fxLayout="column" fxLayoutGap="20px">
+            <mat-form-field fxFlex="50">
+              <input autocomplete="off" placeholder="Title" matInput formControlName="title" required>
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input autocomplete="off" placeholder="Description" matInput formControlName="description" required>
+            </mat-form-field>
+          </div>
+          <div fxLayout="column">
+            <mat-form-field>
+              <input [matDatepicker]="createDate"
+              autocomplete="off" 
+              readonly="true"
+              placeholder="Date Created" 
+              matInput 
+              formControlName="created" >
+              <mat-datepicker-toggle matSuffix [for]="createDate"></mat-datepicker-toggle>
+              <mat-datepicker #createDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+  </ng-template>
+  
+  <div class='mt-4' fxLayoutGap="20px" fxLayout="row">
+    <button mat-raised-button *ngIf="data.type === 'new'" [disabled]="!itemForm.valid" color="primary" (click)="submitAdd()">Submit</button>
+    <button mat-raised-button *ngIf="data.type === 'edit'" [disabled]="!itemForm.valid" color="primary" (click)="submitExistingItem()">Submit</button>
+    <button mat-raised-button color="warn" (click)="cancelDialog()">Cancel</button>
+
+    
+  </div>
+

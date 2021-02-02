@@ -30,6 +30,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ScrollingModule} from '@angular/cdk/scrolling';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { ScrollingModule} from '@angular/cdk/scrolling';
     MatSortModule,
     MatPaginatorModule,
     ScrollingModule,
-    ScrollingModule
+    ScrollingModule,
+    MatMomentDateModule
 
   ],
   exports: [
@@ -108,7 +110,7 @@ import { ScrollingModule} from '@angular/cdk/scrolling';
     MatSortModule,
     MatPaginatorModule,
     ScrollingModule,
-
+    MatMomentDateModule
 
   ]
 })

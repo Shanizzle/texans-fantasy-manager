@@ -32,14 +32,14 @@ export class ItemsService {
     return this.http.get(url, {headers: this.headers});
   }
 
-  // updateItem(itemId: string) {
-  //   const url =  this.itemApi.UpdateItem(itemId);
-  //   return this.http.put(url, JSON.stringify(model), {headers: this.headers});
-  // }
+  updateItem(model) {
+    const url =  this.itemApi.UpdateItem(model.id);
+    return this.http.put(url, JSON.stringify(model), {headers: this.headers});
+  }
 
   removeItem(itemId: string) {
     const url =  this.itemApi.RemoveItem(itemId);
-    return this.http.get(url, {headers: this.headers});
+    return this.http.delete(url, {headers: this.headers});
   }
 
   createNewItem(model: NewItem) {

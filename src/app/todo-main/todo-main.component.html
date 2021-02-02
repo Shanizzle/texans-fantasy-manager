@@ -1,44 +1,84 @@
 <header>
-    <div class="container container-nav">
-        <div>
-            <h1>Manager's Todo List</h1>
-        </div>
-        <nav class="nav">
-            <ul>
-                <li><a routerLink="/">HOME</a></li>
-                <li><a routerLink="/todo"  routerLinkActive="active-link">TODO LIST</a></li>
-                <li><a href="" routerLinkActive="active-link">ABOUT</a></li>
-            </ul>
-        </nav>
-       
+  <div class="container container-nav">
+    <div>
+      <h1>Manager's Todo List</h1>
     </div>
+    <nav class="nav">
+      <ul>
+        <li><a routerLink="/">HOME</a></li>
+        <li>
+          <a routerLink="/todo" routerLinkActive="active-link">TODO LIST</a>
+        </li>
+        <li><a routerLink="/about" routerLinkActive="active-link">ABOUT</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<div fxLayout="column" class="basic-container">
-    <mat-label>New Todo Item:</mat-label>
-    <div class="formWrapper" fxLayout="row" fxLayoutGap="10px">
-         
-        <mat-form-field fxFlex="20">
-            <input matInput placeholder="Todo Title" type="text">
-        </mat-form-field>
-        <mat-form-field fxFlex="20">
-            <input matInput placeholder="Todo Description" type="text">
-        </mat-form-field>
+<div class="btnWrapper">
 
-        <button (click)="createNewItem()" color="warning">Submit</button>
-    </div>
-   
-    <div>
-        <mat-list>
-            <mat-label>Todo List:</mat-label> 
-             <mat-list-item *ngFor="let item of allItems$ | async" [value]="item">{{item.title}} - {{item.description}}</mat-list-item>
-         </mat-list> 
+    <table #itemsTable mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="title">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ element.title }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ element.description }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container matColumnDef="createdDate">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef>Date Created</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            {{ element.created | date: "M/d/yyyy" }}
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container matColumnDef="complete">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef>Completed</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <mat-checkbox
+              readonly="true"                
+              color="primary"
+              style="padding-left: 20px"
+              [checked]="element.done == true"
+              (change)="completeItem($event, element)"
+            >
+            </mat-checkbox>
+          </td>
+        </tr>
+      </ng-container>
 
-    </div>
-    
-</div>
+      <ng-container matColumnDef="action">
+        <tr>
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <mat-icon (click)="editItem(i, element)">edit</mat-icon>
+            <mat-icon color="warn" (click)="removeItem(element)">delete</mat-icon>
+          </td>
+        </tr>
+      </ng-container>
 
-
-
-
-
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <button
+    style="margin-top: 10px;"
+    mat-raised-button
+    type="button"
+    (click)="createNewItem()"
+    color="primary"
+  >
+    Add Todo
+  </button>
+  </div>
+  

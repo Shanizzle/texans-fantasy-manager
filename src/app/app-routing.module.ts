@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { TodoMainComponent } from './todo-main/todo-main.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'todo', component: TodoMainComponent }
+  { path: 'todo', component: TodoMainComponent },
+  { path: 'about', component: AboutComponent }
 
 ];
 
